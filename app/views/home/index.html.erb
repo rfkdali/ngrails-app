@@ -1,3 +1,12 @@
-<div ng-controller="HomeController">
-  <h1>{{title}}</h1>  
+<div ng-controller="HomeCtrl">
+  <h1>{{title}}</h1>
+  <label>Search by keyword: <input ng-model="search"></label>
+  <ul ng-repeat="condition in conditions | filter: search | orderBy:'-synonyms.length' | limitTo: 5">
+    <li>{{condition.label}}</li>
+    <li>{{condition.cui}}</li>
+    <li>{{condition.synonyms.length}}</li>
+    <ul ng-repeat="synonym in condition.synonyms">
+      <li>{{synonym}}</li>
+    </ul>
+  </ul>  
 </div>
