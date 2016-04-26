@@ -1,5 +1,5 @@
 var ngRailsApp = angular.module('ngRailsApp', ['ui.bootstrap'])
-  .controller('HomeCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+  .controller('HomeCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
     $scope.title = "Condition list";
     
     $http.get('/conditions').success(function(data) {
@@ -7,7 +7,7 @@ var ngRailsApp = angular.module('ngRailsApp', ['ui.bootstrap'])
     });
 
     $scope.open = function (label, synonymList) {
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: "modal.html",
         controller: 'modalCtrl',
         resolve: {
@@ -23,11 +23,11 @@ var ngRailsApp = angular.module('ngRailsApp', ['ui.bootstrap'])
     }
   }])
 
-  .controller('modalCtrl', ['$scope','$modalInstance','label', 'synonymList', function ($scope, $modalInstance, label, synonymList) {
+  .controller('modalCtrl', ['$scope','$uibModalInstance','label', 'synonymList', function ($scope, $uibModalInstance, label, synonymList) {
       $scope.label = label;
       $scope.synonymList = synonymList;
       $scope.close = function () {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
       };
     }
     ]
