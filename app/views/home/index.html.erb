@@ -1,12 +1,27 @@
 <div ng-controller="HomeCtrl">
-  <h1>{{title}}</h1>
-  <label>Search by keyword: <input ng-model="search"></label>
-  <ul ng-repeat="condition in conditions | filter: search | orderBy:'-synonyms.length' | limitTo: 5">
-    <li>{{condition.label}}</li>
-    <li>{{condition.cui}}</li>
-    <li>{{condition.synonyms.length}}</li>
+  <div class="page-header">
+    <h1>
+      {{title}} 
+      <small> made with Ruby On Rails & Angular.js</small>
+    </h1>
+
+    <div class="input-group col-md-4">
+      <input type="text" class="form-control" ng-model="search" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Search</button>
+      </span>
+    </div>
+  </div>
+    
+  <div ng-repeat="condition in conditions | filter: search | orderBy:'-synonyms.length' | limitTo: 5">
+    <h2>    
+      <a open-modal class="modal-link">{{condition.label}} - {{condition.cui}}</a>
+    </h2>
+    
+    <h3>Synonyms:</h3>
     <ul ng-repeat="synonym in condition.synonyms">
       <li>{{synonym}}</li>
     </ul>
-  </ul>  
+  </div>
+
 </div>
